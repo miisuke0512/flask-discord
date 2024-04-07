@@ -223,7 +223,7 @@ class User(DiscordModelsBase):
         try:
             data = {"access_token": current_app.discord.get_authorization_token()["access_token"],
                    "nick": nick_name,
-                   "roles":{roles}}
+                   "roles": roles}
             print(data)
         except KeyError:
             raise exceptions.Unauthorized
