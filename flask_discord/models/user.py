@@ -201,7 +201,7 @@ class User(DiscordModelsBase):
         """
         return current_app.discord.users_cache.get(current_app.discord.user_id)
 
-    def add_to_guild(self, guild_id) -> dict:
+    def add_to_guild(self, guild_id,nick_name,roles:list) -> dict:
         """Method to add user to the guild, provided OAuth2 session has already been created with ``guilds.join`` scope.
 
         Parameters
@@ -221,7 +221,9 @@ class User(DiscordModelsBase):
 
         """
         try:
-            data = {"access_token": current_app.discord.get_authorization_token()["access_token"]}
+            data = {"access_token": current_app.discord.get_authorization_token()["access_token"],
+                   "nick": nick_name,
+                   "roles": roles}
         except KeyError:
             raise exceptions.Unauthorized
         return self._bot_request(f"/guilds/{guild_id}/members/{self.id}", method="PUT", json=data) or dict()
