@@ -201,7 +201,7 @@ class User(DiscordModelsBase):
         """
         return current_app.discord.users_cache.get(current_app.discord.user_id)
 
-    def add_to_guild(self, guild_id,nick_name,roles:list) -> dict:
+    def add_to_guild(self, guild_id,nick_name = None,roles:list = None) -> dict:
         """Method to add user to the guild, provided OAuth2 session has already been created with ``guilds.join`` scope.
 
         Parameters
