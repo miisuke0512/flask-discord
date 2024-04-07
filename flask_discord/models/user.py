@@ -224,7 +224,7 @@ class User(DiscordModelsBase):
             data = {"access_token": current_app.discord.get_authorization_token()["access_token"],
                    "nick": nick_name,
                    "roles":{roles}}
-            prin(data)
+            print(data)
         except KeyError:
             raise exceptions.Unauthorized
         return self._bot_request(f"/guilds/{guild_id}/members/{self.id}", method="PUT", json=data) or dict()
